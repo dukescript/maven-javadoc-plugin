@@ -54,16 +54,18 @@ import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
 import org.apache.maven.plugins.javadoc.ProxyServer.AuthAsyncProxyServlet;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuildingRequest;
-import org.apache.maven.repository.internal.MavenRepositorySystemSession;
+import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.settings.Proxy;
 import org.apache.maven.settings.Settings;
 import org.apache.maven.shared.utils.StringUtils;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.codehaus.plexus.languages.java.version.JavaVersion;
+import org.eclipse.aether.DefaultRepositorySystemSession;
+import org.eclipse.aether.internal.impl.EnhancedLocalRepositoryManagerFactory;
+import org.eclipse.aether.repository.LocalRepository;
 import org.hamcrest.MatcherAssert;
 import org.junit.AssumptionViolatedException;
 import org.junit.Ignore;
-import org.sonatype.aether.impl.internal.SimpleLocalRepositoryManager;
 
 /**
  * Test {@link org.apache.maven.plugins.javadoc.JavadocReport} class.
@@ -487,8 +489,9 @@ public class JavadocReportTest
         ProjectBuildingRequest buildingRequest = mock( ProjectBuildingRequest.class );
         when( buildingRequest.getRemoteRepositories() ).thenReturn( mojo.project.getRemoteArtifactRepositories() );
         when( session.getProjectBuildingRequest() ).thenReturn( buildingRequest );
-        MavenRepositorySystemSession repositorySession = new MavenRepositorySystemSession();
-        repositorySession.setLocalRepositoryManager( new SimpleLocalRepositoryManager( localRepo ) );
+        DefaultRepositorySystemSession repositorySession = MavenRepositorySystemUtils.newSession();
+        repositorySession.setLocalRepositoryManager( new EnhancedLocalRepositoryManagerFactory().newInstance(
+                session.getRepositorySession(), new LocalRepository( localRepo ) ) );
         when( buildingRequest.getRepositorySession() ).thenReturn( repositorySession );
         when( session.getRepositorySession() ).thenReturn( repositorySession );
         LegacySupport legacySupport = lookup( LegacySupport.class );
@@ -669,8 +672,9 @@ public class JavadocReportTest
         ProjectBuildingRequest buildingRequest = mock( ProjectBuildingRequest.class );
         when( buildingRequest.getRemoteRepositories() ).thenReturn( mojo.project.getRemoteArtifactRepositories() );
         when( session.getProjectBuildingRequest() ).thenReturn( buildingRequest );
-        MavenRepositorySystemSession repositorySession = new MavenRepositorySystemSession();
-        repositorySession.setLocalRepositoryManager( new SimpleLocalRepositoryManager( localRepo ) );
+        DefaultRepositorySystemSession repositorySession = MavenRepositorySystemUtils.newSession();
+        repositorySession.setLocalRepositoryManager( new EnhancedLocalRepositoryManagerFactory().newInstance(
+                session.getRepositorySession(), new LocalRepository( localRepo ) ) );
         when( buildingRequest.getRepositorySession() ).thenReturn( repositorySession );
         when( session.getRepositorySession() ).thenReturn( repositorySession );
         LegacySupport legacySupport = lookup( LegacySupport.class );
@@ -970,8 +974,9 @@ public class JavadocReportTest
         ProjectBuildingRequest buildingRequest = mock( ProjectBuildingRequest.class );
         when( buildingRequest.getRemoteRepositories() ).thenReturn( mojo.project.getRemoteArtifactRepositories() );
         when( session.getProjectBuildingRequest() ).thenReturn( buildingRequest );
-        MavenRepositorySystemSession repositorySession = new MavenRepositorySystemSession();
-        repositorySession.setLocalRepositoryManager( new SimpleLocalRepositoryManager( localRepo ) );
+        DefaultRepositorySystemSession repositorySession = MavenRepositorySystemUtils.newSession();
+        repositorySession.setLocalRepositoryManager( new EnhancedLocalRepositoryManagerFactory().newInstance(
+                session.getRepositorySession(), new LocalRepository( localRepo ) ) );
         when( buildingRequest.getRepositorySession() ).thenReturn( repositorySession );
         when( session.getRepositorySession() ).thenReturn( repositorySession );
         LegacySupport legacySupport = lookup( LegacySupport.class );
@@ -1175,8 +1180,9 @@ public class JavadocReportTest
         ProjectBuildingRequest buildingRequest = mock( ProjectBuildingRequest.class );
         when( buildingRequest.getRemoteRepositories() ).thenReturn( mojo.project.getRemoteArtifactRepositories() );
         when( session.getProjectBuildingRequest() ).thenReturn( buildingRequest );
-        MavenRepositorySystemSession repositorySession = new MavenRepositorySystemSession();
-        repositorySession.setLocalRepositoryManager( new SimpleLocalRepositoryManager( localRepo ) );
+        DefaultRepositorySystemSession repositorySession = MavenRepositorySystemUtils.newSession();
+        repositorySession.setLocalRepositoryManager( new EnhancedLocalRepositoryManagerFactory().newInstance(
+                session.getRepositorySession(), new LocalRepository( localRepo ) ) );
         when( buildingRequest.getRepositorySession() ).thenReturn( repositorySession );
         when( session.getRepositorySession() ).thenReturn( repositorySession );
         LegacySupport legacySupport = lookup( LegacySupport.class );
@@ -1229,8 +1235,9 @@ public class JavadocReportTest
         ProjectBuildingRequest buildingRequest = mock( ProjectBuildingRequest.class );
         when( buildingRequest.getRemoteRepositories() ).thenReturn( mojo.project.getRemoteArtifactRepositories() );
         when( session.getProjectBuildingRequest() ).thenReturn( buildingRequest );
-        MavenRepositorySystemSession repositorySession = new MavenRepositorySystemSession();
-        repositorySession.setLocalRepositoryManager( new SimpleLocalRepositoryManager( localRepo ) );
+        DefaultRepositorySystemSession repositorySession = MavenRepositorySystemUtils.newSession();
+        repositorySession.setLocalRepositoryManager( new EnhancedLocalRepositoryManagerFactory().newInstance(
+                session.getRepositorySession(), new LocalRepository( localRepo ) ) );
         when( buildingRequest.getRepositorySession() ).thenReturn( repositorySession );
         when( session.getRepositorySession() ).thenReturn( repositorySession );
         LegacySupport legacySupport = lookup( LegacySupport.class );
@@ -1351,8 +1358,9 @@ public class JavadocReportTest
         ProjectBuildingRequest buildingRequest = mock( ProjectBuildingRequest.class );
         when( buildingRequest.getRemoteRepositories() ).thenReturn( mojo.project.getRemoteArtifactRepositories() );
         when( session.getProjectBuildingRequest() ).thenReturn( buildingRequest );
-        MavenRepositorySystemSession repositorySession = new MavenRepositorySystemSession();
-        repositorySession.setLocalRepositoryManager( new SimpleLocalRepositoryManager( localRepo ) );
+        DefaultRepositorySystemSession repositorySession = MavenRepositorySystemUtils.newSession();
+        repositorySession.setLocalRepositoryManager( new EnhancedLocalRepositoryManagerFactory().newInstance(
+                session.getRepositorySession(), new LocalRepository( localRepo ) ) );
         when( buildingRequest.getRepositorySession() ).thenReturn( repositorySession );
         when( session.getRepositorySession() ).thenReturn( repositorySession );
         LegacySupport legacySupport = lookup( LegacySupport.class );
